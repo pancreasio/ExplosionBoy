@@ -13,6 +13,8 @@ public class Enemy : MonoBehaviour
         random, chase
     }
 
+    public static int activeEnemies;
+
     public float visionRange;
     public float speed;
     public float correctionSpeed;
@@ -290,5 +292,9 @@ public class Enemy : MonoBehaviour
             case movement.none:
                 break;
         }
+    }
+    private void OnDestroy()
+    {
+        activeEnemies--;
     }
 }

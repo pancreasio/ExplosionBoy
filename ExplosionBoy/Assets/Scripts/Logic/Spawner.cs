@@ -8,15 +8,11 @@ public class Spawner : MonoBehaviour
     public GameObject enemy;
     public GameObject player;
     public GameObject playerReference;
-
-    private void Start()
-    {
-        spawnStuff(17, 17, 30, 4);
-    }
-
+   
     public void spawnStuff(int xLimit, int zLimit, int ammountOfBoxes, int ammountOfEnemies)
     {
         int stuff = ammountOfBoxes + ammountOfEnemies;
+        Enemy.activeEnemies += ammountOfEnemies;
 
         while (stuff > 0)
         {
@@ -45,7 +41,6 @@ public class Spawner : MonoBehaviour
         {
 
         }
-
     }
 
     private bool spawnBox(Vector3 position)

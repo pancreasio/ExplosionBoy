@@ -5,6 +5,7 @@ using UnityEngine;
 public class Bomb : MonoBehaviour
 {
     public float fuseTime;
+    public float range;
 
     private float clock;
     private void Start()
@@ -45,28 +46,27 @@ public class Bomb : MonoBehaviour
 
     private void Explode()
     {
-        //aycastHit hitUp, hitDown, hitLeft, hitRight;
         Physics.Raycast(transform.position, transform.forward, out RaycastHit hitUp, 1.0f);
         Physics.Raycast(transform.position, -transform.forward, out RaycastHit hitDown, 1.0f);
         Physics.Raycast(transform.position, -transform.right, out RaycastHit hitLeft, 1.0f);
         Physics.Raycast(transform.position, transform.right, out RaycastHit hitRight, 1.0f);
 
-        if (hitUp.transform != null && hitUp.transform.tag != "Wall")
+        if (hitUp.transform != null && (hitUp.transform.tag != "Wall" || hitUp.transform.name == "Box(Clone)"))
         {
             Destroy(hitUp.transform.gameObject);
         }
 
-        if (hitDown.transform != null && hitDown.transform.tag != "Wall")
+        if (hitDown.transform != null && (hitDown.transform.tag != "Wall" || hitDown.transform.name == "Box(Clone)"))
         {
             Destroy(hitDown.transform.gameObject);
         }
 
-        if (hitRight.transform != null && hitRight.transform.tag != "Wall")
+        if (hitRight.transform != null && (hitRight.transform.tag != "Wall" || hitRight.transform.name == "Box(Clone)"))
         {
             Destroy(hitRight.transform.gameObject);
         }
 
-        if (hitLeft.transform != null && hitLeft.transform.tag != "Wall")
+        if (hitLeft.transform != null && (hitLeft.transform.tag != "Wall" || hitLeft.transform.name =="Box(Clone)"))
         {
             Destroy(hitLeft.transform.gameObject);
         }
