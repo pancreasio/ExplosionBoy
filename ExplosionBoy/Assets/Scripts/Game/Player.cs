@@ -162,7 +162,7 @@ public class Player : MonoBehaviour
         activeBomb = Instantiate(bomb, transform.position, transform.rotation);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionStay(Collision collision)
     {
         if (collision.transform.tag == "Enemy")
         {

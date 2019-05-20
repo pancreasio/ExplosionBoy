@@ -6,10 +6,12 @@ public class Spawner : MonoBehaviour
 {
     public GameObject box;
     public GameObject enemy;
+    public GameObject player;
+    public GameObject playerReference;
 
     private void Start()
     {
-        spawnStuff(17, 17, 30, 7);
+        spawnStuff(17, 17, 30, 4);
     }
 
     public void spawnStuff(int xLimit, int zLimit, int ammountOfBoxes, int ammountOfEnemies)
@@ -39,6 +41,11 @@ public class Spawner : MonoBehaviour
                 stuff--;
             }
         }
+        while (!spawnPlayer(new Vector3(Random.Range(Mathf.FloorToInt(transform.position.x), Mathf.FloorToInt(transform.position.x) + xLimit) + 0.5f, 0.5f, Random.Range(Mathf.FloorToInt(transform.position.z), Mathf.FloorToInt(transform.position.z) + zLimit) + 0.5f)))
+        {
+
+        }
+
     }
 
     private bool spawnBox(Vector3 position)
@@ -66,4 +73,18 @@ public class Spawner : MonoBehaviour
             return true;
         }
     }
+
+    private bool spawnPlayer(Vector3 position)
+    {
+        if (Physics.CheckSphere(position, 0.1f))
+        {
+            return false;
+        }
+        else
+        {
+            playerReference = Instantiate(player, position, Quaternion.identity);
+            return true;
+        }
+    }
+
 }
