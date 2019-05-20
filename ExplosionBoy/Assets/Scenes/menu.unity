@@ -224,7 +224,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxLives: 2
-  enemies: 1
+  enemies: 0
   boxes: 1
 --- !u!4 &402848864
 Transform:
