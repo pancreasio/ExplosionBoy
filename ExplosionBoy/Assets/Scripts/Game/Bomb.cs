@@ -72,4 +72,12 @@ public class Bomb : MonoBehaviour
         }
         Destroy(this.gameObject);
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            transform.tag = "Wall";
+        }
+    }
 }

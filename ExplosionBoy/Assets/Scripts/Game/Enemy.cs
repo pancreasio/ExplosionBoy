@@ -18,6 +18,11 @@ public class Enemy : MonoBehaviour
     public float correctionSpeed;
     public float changeDirectionTime;
     public float snapThreshold;
+    public GameObject lCheck;
+    public GameObject rCheck;
+    public GameObject uCheck;
+    public GameObject dCheck;
+
 
     private fsm actualState;
     private movement currentMovement;
@@ -25,6 +30,10 @@ public class Enemy : MonoBehaviour
     private List<movement> possibleMovements;
     private int possibleMovementsCount;
     private float changeDirectionClock;
+    private Check lCheckBool;
+    private Check rCheckBool;
+    private Check uCheckBool;
+    private Check dCheckBool;
     private void Start()
     {
         possibleMovements = new List<movement>();
@@ -32,7 +41,11 @@ public class Enemy : MonoBehaviour
         currentMovement = movement.none;
         chaseMovement = movement.none;
         changeDirectionClock = 0;
-    }
+        lCheckBool = lCheck.GetComponent<Check>();
+        rCheckBool = rCheck.GetComponent<Check>();
+        uCheckBool = uCheck.GetComponent<Check>();
+        dCheckBool = dCheck.GetComponent<Check>();
+}
     private void Update()
     {
         possibleMovements.Clear();
@@ -40,10 +53,10 @@ public class Enemy : MonoBehaviour
         changeDirectionClock += Time.deltaTime;
 
         //-----------possible movement raycasts-----------------
-        Physics.Raycast(transform.position, transform.forward, out RaycastHit moveUp, 0.7f);
-        Physics.Raycast(transform.position, -transform.forward, out RaycastHit moveDown, 0.7f);
-        Physics.Raycast(transform.position, -transform.right, out RaycastHit moveLeft, 0.7f);
-        Physics.Raycast(transform.position, transform.right, out RaycastHit moveRight, 0.7f);
+        //Physics.Raycast(transform.position, transform.forward, out RaycastHit moveUp, 0.7f);
+        //Physics.Raycast(transform.position, -transform.forward, out RaycastHit moveDown, 0.7f);
+        //Physics.Raycast(transform.position, -transform.right, out RaycastHit moveLeft, 0.7f);
+        //Physics.Raycast(transform.position, transform.right, out RaycastHit moveRight, 0.7f);
 
         //----------player seeking raycasts---------------------
         Physics.Raycast(transform.position, transform.forward, out RaycastHit viewUp, visionRange);
@@ -88,7 +101,7 @@ public class Enemy : MonoBehaviour
         }
 
         //---------possible movement checks--------------------
-        if (viewUp.transform == null || viewUp.transform.tag == "Player")
+        if (!uCheckBool.isTrigger)
         {
             possibleMovements.Insert(possibleMovementsCount, movement.up);
             possibleMovementsCount++;
@@ -97,36 +110,40 @@ public class Enemy : MonoBehaviour
         {
             if (currentMovement == movement.up)
             {
-                changeDirectionClock += changeDirectionTime;
+                currentMovement = movement.none;
+                changeDirectionClock = 0;
             }
         }
-        if (viewDown.transform == null || viewDown.transform.tag == "Player")
+
+        if (!dCheckBool.isTrigger)
         {
             possibleMovements.Insert(possibleMovementsCount, movement.down);
             possibleMovementsCount++;
-
         }
         else
         {
             if (currentMovement == movement.down)
             {
-                changeDirectionClock += changeDirectionTime;
+                currentMovement = movement.none;
+                changeDirectionClock = 0;
             }
         }
-        if (viewLeft.transform == null || viewLeft.transform.tag == "Player")
+
+        if (!lCheckBool.isTrigger)
         {
             possibleMovements.Insert(possibleMovementsCount, movement.left);
             possibleMovementsCount++;
-
         }
         else
         {
             if (currentMovement == movement.left)
             {
-                changeDirectionClock += changeDirectionTime;
+                currentMovement = movement.none;
+                changeDirectionClock = 0;
             }
         }
-        if (viewRight.transform == null || viewRight.transform.tag == "Player")
+
+        if (!rCheckBool.isTrigger)
         {
             possibleMovements.Insert(possibleMovementsCount, movement.right);
             possibleMovementsCount++;
@@ -135,7 +152,8 @@ public class Enemy : MonoBehaviour
         {
             if (currentMovement == movement.right)
             {
-                changeDirectionClock += changeDirectionTime;
+                currentMovement = movement.none;
+                changeDirectionClock = 0;
             }
         }
 
@@ -158,6 +176,7 @@ public class Enemy : MonoBehaviour
                 }
                 break;
             case fsm.chase:
+                changeDirectionClock = 0;
                 currentMovement = chaseMovement;
                 break;
         }
@@ -271,6 +290,5 @@ public class Enemy : MonoBehaviour
             case movement.none:
                 break;
         }
-        Debug.Log(currentMovement);
     }
 }

@@ -6,14 +6,15 @@ public class Check : MonoBehaviour
 {
     public bool isTrigger;
 
+    private GameObject necessaryParent;
     private void Awake()
     {
         isTrigger = false;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        if (other.tag != "Player" && other.tag !="Check")
+        if (other.tag == "Wall")
         {
             isTrigger = true;
         }
@@ -21,7 +22,7 @@ public class Check : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag != "Player" && other.tag != "Check")
+        if (other.tag == "Wall")
         {
             isTrigger = false;
         }

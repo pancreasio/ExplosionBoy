@@ -9,7 +9,7 @@ public class Spawner : MonoBehaviour
 
     private void Start()
     {
-        spawnStuff(17, 17, 7, 3);
+        spawnStuff(17, 17, 30, 7);
     }
 
     public void spawnStuff(int xLimit, int zLimit, int ammountOfBoxes, int ammountOfEnemies)

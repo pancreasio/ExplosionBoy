@@ -161,4 +161,12 @@ public class Player : MonoBehaviour
     {
         activeBomb = Instantiate(bomb, transform.position, transform.rotation);
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.tag == "Enemy")
+        {
+            Destroy(this.gameObject);
+        }
+    }
 }
