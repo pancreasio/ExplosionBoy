@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public int maxLives, enemies, boxes, scoreMultiplier, score, highScore;
+    public bool doneLoading;
+    public float loadProgress;
 
     private int lives, countedAliveEnemies, killedEnemies;
     private GameObject spawner;
@@ -14,6 +16,7 @@ public class GameManager : MonoBehaviour
     private GameObject playerReference;
     private Scene currentScene;
     private bool spawned;
+    
 
     private void Awake()
     {
@@ -27,6 +30,7 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(this.gameObject);
             spawned = false;
             highScore = 0;
+            doneLoading = true;
         }
     }
     public void loadMenu()
@@ -38,7 +42,7 @@ public class GameManager : MonoBehaviour
         spawned = false;
         lives = maxLives;
         score = 0;
-        SceneManager.LoadScene("game", LoadSceneMode.Single);
+        StartCoroutine(LoadAsynchronously("game"));
     }
 
     public void loadGameOver()
@@ -64,6 +68,14 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         currentScene = SceneManager.GetActiveScene();
+        if (loadProgress >= 100.0f)
+        {
+            doneLoading = true;
+        }
+        if(!doneLoading)
+        {
+            GameObject.Find("UI Manager").transform.GetComponent<UIManager>().assignLoadText();
+        }
 
         switch (currentScene.name)
         {
@@ -101,6 +113,17 @@ public class GameManager : MonoBehaviour
             case "gameOver":
                 GameObject.Find("UI Manager").transform.GetComponent<UIManager>().assignScoreText();
                 break;
+        }
+    }
+
+    IEnumerator LoadAsynchronously(string sceneName)
+    {
+        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
+        doneLoading = false;
+        while (!operation.isDone)
+        {
+            loadProgress = Mathf.Clamp01(operation.progress / 0.9f) * 100;
+            yield return null;
         }
     }
 

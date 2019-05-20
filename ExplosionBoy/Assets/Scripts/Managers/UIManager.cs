@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    public Text highScoreText, scoreText;
+    public Text highScoreText, scoreText, loadText;
     public void loadGame()
     {
         GameObject.Find("Game Manager").GetComponent<GameManager>().loadGame();
@@ -26,5 +26,10 @@ public class UIManager : MonoBehaviour
     {
         highScoreText.text = "Highscore: " + GameObject.Find("Game Manager").GetComponent<GameManager>().highScore;
         scoreText.text = "Score: " + GameObject.Find("Game Manager").GetComponent<GameManager>().score;
+    }
+
+    public void assignLoadText()
+    {
+        loadText.text = "loading: "+GameObject.Find("Game Manager").GetComponent<GameManager>().loadProgress.ToString() + "%";
     }
 }
