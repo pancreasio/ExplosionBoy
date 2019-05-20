@@ -9,7 +9,7 @@ public class Spawner : MonoBehaviour
 
     private void Start()
     {
-        spawnStuff(17, 17, 7, 0);
+        spawnStuff(17, 17, 7, 3);
     }
 
     public void spawnStuff(int xLimit, int zLimit, int ammountOfBoxes, int ammountOfEnemies)
@@ -25,14 +25,16 @@ public class Spawner : MonoBehaviour
                 {
 
                 }
-                Debug.Log(targetPos);
                 ammountOfBoxes--;
                 stuff--;
             }
 
             if (ammountOfEnemies > 0)
             {
-                while (!spawnEnemy(targetPos = new Vector3(Random.Range(0, xLimit), 0.5f, Random.Range(0, zLimit)))) { }
+                while (!spawnEnemy(targetPos = new Vector3(Random.Range(Mathf.FloorToInt(transform.position.x), Mathf.FloorToInt(transform.position.x) + xLimit) + 0.5f, 0.5f, Random.Range(Mathf.FloorToInt(transform.position.z), Mathf.FloorToInt(transform.position.z) + zLimit) + 0.5f)))
+                {
+
+                }
                 ammountOfEnemies--;
                 stuff--;
             }
@@ -54,7 +56,7 @@ public class Spawner : MonoBehaviour
 
     private bool spawnEnemy(Vector3 position)
     {
-        if (Physics.CheckSphere(position, 0.5f))
+        if (Physics.CheckSphere(position, 0.1f))
         {
             return false;
         }

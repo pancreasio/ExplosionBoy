@@ -53,25 +53,21 @@ public class Bomb : MonoBehaviour
 
         if (hitUp.transform != null && hitUp.transform.tag != "Wall")
         {
-            Debug.Log(hitUp.transform.tag);
             Destroy(hitUp.transform.gameObject);
         }
 
         if (hitDown.transform != null && hitDown.transform.tag != "Wall")
         {
-            Debug.Log(hitDown.transform.tag);
             Destroy(hitDown.transform.gameObject);
         }
 
         if (hitRight.transform != null && hitRight.transform.tag != "Wall")
         {
-            Debug.Log(hitRight.transform.tag);
             Destroy(hitRight.transform.gameObject);
         }
 
         if (hitLeft.transform != null && hitLeft.transform.tag != "Wall")
         {
-            Debug.Log(hitLeft.transform.tag);
             Destroy(hitLeft.transform.gameObject);
         }
         Destroy(this.gameObject);

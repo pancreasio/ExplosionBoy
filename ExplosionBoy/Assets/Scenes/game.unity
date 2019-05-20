@@ -6309,7 +6309,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   box: {fileID: 6335215516231811681, guid: a48322eb3d6a5d442820e05b9ea8d234, type: 3}
-  enemy: {fileID: 6335215516231811681, guid: a48322eb3d6a5d442820e05b9ea8d234, type: 3}
+  enemy: {fileID: 487067676306831162, guid: ef2af9e1153cfdc449ba1c4b2ab5f701, type: 3}
 --- !u!33 &1965436647
 MeshFilter:
   m_ObjectHideFlags: 0
