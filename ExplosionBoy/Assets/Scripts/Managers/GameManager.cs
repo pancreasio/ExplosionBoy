@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public int maxLives, enemies, boxes;
+    public int maxLives, enemies, boxes, scoreMultiplier, score, highScore;
 
     private int lives, countedAliveEnemies, killedEnemies;
     private GameObject spawner;
@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
             managerInstance = this.gameObject;
             DontDestroyOnLoad(this.gameObject);
             spawned = false;
+            highScore = 0;
         }
     }
     public void loadMenu()
@@ -36,11 +37,16 @@ public class GameManager : MonoBehaviour
     {
         spawned = false;
         lives = maxLives;
+        score = 0;
         SceneManager.LoadScene("game", LoadSceneMode.Single);
     }
 
     public void loadGameOver()
     {
+        if (score >= highScore)
+        {
+            highScore = score;
+        }
         SceneManager.LoadScene("gameOver", LoadSceneMode.Single);
     }
 
@@ -84,10 +90,7 @@ public class GameManager : MonoBehaviour
                     {
                         killedEnemies += countedAliveEnemies - Enemy.activeEnemies;
                         countedAliveEnemies = Enemy.activeEnemies;
-                    }
-                    if (countedAliveEnemies <= 0)
-                    {
-                        //loadGameOver();
+                        score = killedEnemies * scoreMultiplier;
                     }
                 }
                 break;
@@ -96,6 +99,7 @@ public class GameManager : MonoBehaviour
                 break;
 
             case "gameOver":
+                GameObject.Find("UI Manager").transform.GetComponent<UIManager>().assignScoreText();
                 break;
         }
     }

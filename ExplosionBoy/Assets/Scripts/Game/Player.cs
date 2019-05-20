@@ -151,7 +151,7 @@ public class Player : MonoBehaviour
         }
 
         //--------------bombs-----------------
-        if (Input.GetKeyDown(KeyCode.Space) && activeBomb == null)
+        if ((Input.GetKeyDown(KeyCode.Space)||Input.GetMouseButtonDown(0))&& activeBomb == null)
         {
             placeBomb();
         }
