@@ -11,11 +11,13 @@ public class Player : MonoBehaviour
     public GameObject rCheck;
     public GameObject uCheck;
     public GameObject dCheck;
+    public GameObject bomb;
 
     private Check lCheckBool;
     private Check rCheckBool;
     private Check uCheckBool;
     private Check dCheckBool;
+    private GameObject activeBomb;
 
     private void Start()
     {
@@ -23,9 +25,11 @@ public class Player : MonoBehaviour
         rCheckBool = rCheck.GetComponent<Check>();
         uCheckBool = uCheck.GetComponent<Check>();
         dCheckBool = dCheck.GetComponent<Check>();
+        activeBomb = null;
     }
     private void Update()
     {
+        //----------------movement----------------
         float offsetZ = Mathf.Abs(transform.position.z) - Mathf.Floor(Mathf.Abs(transform.position.z));
         float offsetX = Mathf.Abs(transform.position.x) - Mathf.Floor(Mathf.Abs(transform.position.x));
         if (Input.GetKey(KeyCode.LeftArrow) && !rCheckBool.isTrigger)
@@ -145,5 +149,16 @@ public class Player : MonoBehaviour
                 }
             }
         }
+
+        //--------------bombs-----------------
+        if (Input.GetKeyDown(KeyCode.Space) && activeBomb == null)
+        {
+            placeBomb();
+        }
+    }
+
+    private void placeBomb()
+    {
+        activeBomb = Instantiate(bomb, transform.position, transform.rotation);
     }
 }
