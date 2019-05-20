@@ -519,9 +519,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxLives: 2
-  enemies: 0
-  boxes: 0
-  scoreMultiplier: 0
+  enemies: 1
+  boxes: 1
+  scoreMultiplier: 100
   score: 0
   highScore: 0
   doneLoading: 0

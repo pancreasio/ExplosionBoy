@@ -303,8 +303,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxLives: 2
-  enemies: 1
-  boxes: 1
+  enemies: 5
+  boxes: 30
   scoreMultiplier: 100
   score: 0
   highScore: 0
@@ -358,7 +358,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 206, y: -201}
+  m_AnchoredPosition: {x: 172, y: -191}
   m_SizeDelta: {x: 432.6, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &767092066
