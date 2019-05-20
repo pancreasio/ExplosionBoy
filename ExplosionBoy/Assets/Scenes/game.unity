@@ -5907,7 +5907,7 @@ MonoBehaviour:
   enemy: {fileID: 487067676306831162, guid: ef2af9e1153cfdc449ba1c4b2ab5f701, type: 3}
   player: {fileID: 1223858105872491648, guid: f3fbcc2f5b7448d48bbb317a4e3ea5dc, type: 3}
   playerReference: {fileID: 0}
-  door: {fileID: 0}
+  door: {fileID: 782330263414266756, guid: 985c8ddf6fdf7c74dbd1628c2a4177c0, type: 3}
 --- !u!33 &1965436647
 MeshFilter:
   m_ObjectHideFlags: 0

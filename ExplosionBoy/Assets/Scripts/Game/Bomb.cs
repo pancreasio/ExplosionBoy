@@ -53,22 +53,50 @@ public class Bomb : MonoBehaviour
 
         if (hitUp.transform != null && (hitUp.transform.tag != "Wall" || hitUp.transform.name == "Box(Clone)"))
         {
-            Destroy(hitUp.transform.gameObject);
+            if (hitUp.transform.name != "Box(Clone)")
+            {
+                Destroy(hitUp.transform.gameObject);
+            }
+            else
+            {
+                hitUp.transform.GetComponent<Box>().explode();
+            }
         }
 
         if (hitDown.transform != null && (hitDown.transform.tag != "Wall" || hitDown.transform.name == "Box(Clone)"))
         {
-            Destroy(hitDown.transform.gameObject);
+            if (hitDown.transform.name != "Box(Clone)")
+            {
+                Destroy(hitDown.transform.gameObject);
+            }
+            else
+            {
+                hitDown.transform.GetComponent<Box>().explode();
+            }
         }
 
         if (hitRight.transform != null && (hitRight.transform.tag != "Wall" || hitRight.transform.name == "Box(Clone)"))
         {
-            Destroy(hitRight.transform.gameObject);
+            if (hitRight.transform.name != "Box(Clone)")
+            {
+                Destroy(hitRight.transform.gameObject);
+            }
+            else
+            {
+                hitRight.transform.GetComponent<Box>().explode();
+            }
         }
 
         if (hitLeft.transform != null && (hitLeft.transform.tag != "Wall" || hitLeft.transform.name =="Box(Clone)"))
         {
-            Destroy(hitLeft.transform.gameObject);
+            if (hitLeft.transform.name != "Box(Clone)")
+            {
+                Destroy(hitLeft.transform.gameObject);
+            }
+            else
+            {
+                hitLeft.transform.GetComponent<Box>().explode();
+            }
         }
         Destroy(this.gameObject);
     }

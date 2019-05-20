@@ -62,10 +62,9 @@ public class GameManager : MonoBehaviour
         switch (currentScene.name)
         {
             case "game":
-                Debug.Log(Enemy.activeEnemies);
                 if (!spawned)
                 {
-                    GameObject.Find("Spawner").GetComponent<Spawner>().spawnStuff(17, 17, 30, enemies);
+                    GameObject.Find("Spawner").GetComponent<Spawner>().spawnStuff(17, 17, boxes, enemies);
                     playerReference = GameObject.Find("Spawner").GetComponent<Spawner>().playerReference;
                     spawned = true;
                     countedAliveEnemies = enemies;

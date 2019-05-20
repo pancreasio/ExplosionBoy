@@ -16,17 +16,19 @@ public class Spawner : MonoBehaviour
         int stuff = ammountOfBoxes + ammountOfEnemies;
         Enemy.activeEnemies += ammountOfEnemies;
         GameObject boxReference = new GameObject();
+        Vector3 position; 
 
         while (stuff > 0)
-        {
-            
-            Vector3 targetPos;
+        {            
             if (ammountOfBoxes > 0)
             {
-                while (!spawnBox(targetPos = new Vector3(Random.Range(Mathf.FloorToInt(transform.position.x), Mathf.FloorToInt(transform.position.x) + xLimit) + 0.5f, 0.5f, Random.Range(Mathf.FloorToInt(transform.position.z), Mathf.FloorToInt(transform.position.z) + zLimit) + 0.5f), ref boxReference))
+                while (!spawnBox(position = new Vector3(Random.Range(Mathf.FloorToInt(transform.position.x), Mathf.FloorToInt(transform.position.x) + xLimit) + 0.5f,
+                    0.5f,
+                    Random.Range(Mathf.FloorToInt(transform.position.z), Mathf.FloorToInt(transform.position.z) + zLimit) + 0.5f)))
                 {
 
                 }
+                boxReference = Instantiate(box, position, Quaternion.identity);
                 if (!doorAsigned)
                 {
                     boxReference.GetComponent<Box>().door = door;
@@ -38,7 +40,9 @@ public class Spawner : MonoBehaviour
 
             if (ammountOfEnemies > 0)
             {
-                while (!spawnEnemy(targetPos = new Vector3(Random.Range(Mathf.FloorToInt(transform.position.x), Mathf.FloorToInt(transform.position.x) + xLimit) + 0.5f, 0.5f, Random.Range(Mathf.FloorToInt(transform.position.z), Mathf.FloorToInt(transform.position.z) + zLimit) + 0.5f)))
+                while (!spawnEnemy(new Vector3(Random.Range(Mathf.FloorToInt(transform.position.x), Mathf.FloorToInt(transform.position.x) + xLimit) + 0.5f,
+                    0.5f,
+                    Random.Range(Mathf.FloorToInt(transform.position.z), Mathf.FloorToInt(transform.position.z) + zLimit) + 0.5f)))
                 {
 
                 }
@@ -52,15 +56,14 @@ public class Spawner : MonoBehaviour
         }        
     }
 
-    private bool spawnBox(Vector3 position, ref GameObject reference)
+    private bool spawnBox(Vector3 position)
     {
         if (Physics.CheckSphere(position, 0.1f))
         {
             return false;
         }
         else
-        {
-            reference = Instantiate(box, position, Quaternion.identity);            
+        {                       
             return true;
         }
     }

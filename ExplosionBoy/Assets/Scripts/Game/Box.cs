@@ -5,17 +5,12 @@ using UnityEngine;
 public class Box : MonoBehaviour
 {
     public GameObject door;
-
-    private void Awake()
+    public void explode()
     {
-        door = null;
-    }
-
-    private void OnDestroy()
-    {
-        if (door!=null)
+        if (door != null)
         {
-            Instantiate(door, transform.position,Quaternion.identity);
+            Instantiate(door, transform.position + new Vector3(0, 1.0f, 0), Quaternion.identity);
         }
+        Destroy(this.gameObject);
     }
 }
