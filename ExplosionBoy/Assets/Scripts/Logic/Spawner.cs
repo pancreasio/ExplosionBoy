@@ -8,20 +8,29 @@ public class Spawner : MonoBehaviour
     public GameObject enemy;
     public GameObject player;
     public GameObject playerReference;
+    public GameObject door;
    
     public void spawnStuff(int xLimit, int zLimit, int ammountOfBoxes, int ammountOfEnemies)
     {
+        bool doorAsigned = false;
         int stuff = ammountOfBoxes + ammountOfEnemies;
         Enemy.activeEnemies += ammountOfEnemies;
+        GameObject boxReference = new GameObject();
 
         while (stuff > 0)
         {
+            
             Vector3 targetPos;
             if (ammountOfBoxes > 0)
             {
-                while (!spawnBox(targetPos = new Vector3(Random.Range(Mathf.FloorToInt(transform.position.x), Mathf.FloorToInt(transform.position.x) + xLimit) + 0.5f, 0.5f, Random.Range(Mathf.FloorToInt(transform.position.z), Mathf.FloorToInt(transform.position.z) + zLimit) + 0.5f)))
+                while (!spawnBox(targetPos = new Vector3(Random.Range(Mathf.FloorToInt(transform.position.x), Mathf.FloorToInt(transform.position.x) + xLimit) + 0.5f, 0.5f, Random.Range(Mathf.FloorToInt(transform.position.z), Mathf.FloorToInt(transform.position.z) + zLimit) + 0.5f), ref boxReference))
                 {
 
+                }
+                if (!doorAsigned)
+                {
+                    boxReference.GetComponent<Box>().door = door;
+                    doorAsigned = true;
                 }
                 ammountOfBoxes--;
                 stuff--;
@@ -40,10 +49,10 @@ public class Spawner : MonoBehaviour
         while (!spawnPlayer(new Vector3(Random.Range(Mathf.FloorToInt(transform.position.x), Mathf.FloorToInt(transform.position.x) + xLimit) + 0.5f, 0.5f, Random.Range(Mathf.FloorToInt(transform.position.z), Mathf.FloorToInt(transform.position.z) + zLimit) + 0.5f)))
         {
 
-        }
+        }        
     }
 
-    private bool spawnBox(Vector3 position)
+    private bool spawnBox(Vector3 position, ref GameObject reference)
     {
         if (Physics.CheckSphere(position, 0.1f))
         {
@@ -51,7 +60,7 @@ public class Spawner : MonoBehaviour
         }
         else
         {
-            Instantiate(box, position, Quaternion.identity);
+            reference = Instantiate(box, position, Quaternion.identity);            
             return true;
         }
     }
@@ -81,5 +90,5 @@ public class Spawner : MonoBehaviour
             return true;
         }
     }
-
+    
 }

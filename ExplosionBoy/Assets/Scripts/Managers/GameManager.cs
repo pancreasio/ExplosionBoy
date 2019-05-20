@@ -88,7 +88,7 @@ public class GameManager : MonoBehaviour
                     }
                     if (countedAliveEnemies <= 0)
                     {
-                        loadGameOver();
+                        //loadGameOver();
                     }
                 }
                 break;
